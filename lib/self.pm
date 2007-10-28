@@ -5,7 +5,7 @@ package self;
 use base 'Exporter::Lite';
 use v5.8.0;
 
-our $VERSION = v0.0.1;
+our $VERSION = '0.10';
 
 our @EXPORT = qw(self args);
 
