@@ -5,7 +5,7 @@ package self;
 use base 'Exporter::Lite';
 use v5.8.0;
 
-our $VERSION = '0.10';
+our $VERSION = '0.11';
 
 our @EXPORT = qw(self args);
 
@@ -44,17 +44,17 @@ This document describes self version 0.0.1
     package MyModule;
     use self;
 
-    // Write constructor as usual
+    # Write constructor as usual
     sub new {
         return bless({}, shift);
     }
 
-    // 'self' is special now.
+    # 'self' is special now.
     sub foo {
         self->{foo}
     }
 
-    // 'args' too
+    # 'args' too
     sub set {
         my ($foo, $bar) = args;
         self->{foo} = $foo;
@@ -78,11 +78,11 @@ Noted that they are not scalar variables, but barewords.
 
 =item self
 
-Return current object.
+Return the current object.
 
 =item args
 
-Return the argument list to current invoked method.
+Return the argument list.
 
 =back
 
