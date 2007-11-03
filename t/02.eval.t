@@ -1,6 +1,6 @@
 use lib 't/lib';
 use EvalTest;
-use Test::More tests => 2;
+use Test::More tests => 3;
 
 {
     my $o = EvalTest->new;
@@ -13,4 +13,11 @@ TODO: {
     my $o = EvalTest->new;
     $o->in(1);
     is($o->out2, 1);
+}
+
+TODO: {
+    local $TODO = "self in eval statement.";
+    my $o = EvalTest->new;
+    $o->in(1);
+    is($o->out3, 1);
 }

@@ -23,4 +23,8 @@ sub out2 {
     };
 }
 
+sub out3 {
+    return eval "self->{n}";
+}
+
 1;

@@ -1,5 +1,13 @@
 Revision history for self
 
-0.0.1  Sun Oct 28 19:23:14 2007
+0.11
+- requires Perl v5.6.0 instead of v5.8.0
+- Use Sub::Exporter instead of Exporter::Lite, this provide
+  a 'renaming' feature, which makes many sense for this module.
+- Using 'self' in eval block or statement is not working, marked as
+  TODO in tests.
+- All these are reported by MARKSTOS++, thanks a lot!.
+
+0.10  Sun Oct 28 19:23:14 2007
        Initial release.
 
