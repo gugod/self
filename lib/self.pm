@@ -2,12 +2,16 @@ use strict;
 use warnings;
 
 package self;
-use base 'Exporter::Lite';
-use v5.8.0;
+our $VERSION = '0.12';
 
-our $VERSION = '0.11';
+use v5.6.0;
 
-our @EXPORT = qw(self args);
+use Sub::Exporter -setup => {
+    exports => [qw(self args)],
+    groups  => {
+        default =>  [ -all ],
+    }
+};
 
 sub _args {
     my @c = do {
