@@ -13,12 +13,18 @@ use Sub::Exporter -setup => {
     }
 };
 
+use YAML;
 sub _args {
-    my @c = do {
-        package DB;
-        @DB::args = ();
-        caller(2);
-    };
+    my $level = 2;
+    my @c = ();
+    while ( !defined($c[3]) || $c[3] eq '(eval)') {
+        @c = do {
+            package DB;
+            @DB::args = ();
+            caller($level);
+        };
+        $level++;
+    }
     return @DB::args;
 }
 
