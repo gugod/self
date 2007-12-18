@@ -2,7 +2,7 @@ use strict;
 use warnings;
 
 package self;
-our $VERSION = '0.12';
+our $VERSION = '0.13';
 
 use v5.6.0;
 

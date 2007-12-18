@@ -1,5 +1,8 @@
 Revision history for self
 
+0.13
+- Make it work inside 'eval'.
+
 0.12
 - requires Perl v5.6.0 instead of v5.8.0
 - Use Sub::Exporter instead of Exporter::Lite, this provide
