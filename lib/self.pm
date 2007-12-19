@@ -4,7 +4,7 @@ use warnings;
 package self;
 our $VERSION = '0.13';
 
-use v5.6.0;
+use 5.006;
 
 use Sub::Exporter -setup => {
     exports => [qw(self args)],
