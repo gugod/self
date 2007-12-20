@@ -2,9 +2,10 @@ use strict;
 use warnings;
 
 package self;
+use 5.006;
+
 our $VERSION = '0.14';
 
-use 5.006;
 
 use Sub::Exporter -setup => {
     exports => [qw(self args)],
