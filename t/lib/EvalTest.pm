@@ -27,4 +27,40 @@ sub out3 {
     return eval "self->{n}";
 }
 
+sub out4 {
+    return eval {
+        eval 'self->{n}';
+    };
+}
+
+sub out5 {
+    eval {
+        eval {
+            self->{n}
+        }
+    }
+}
+
+sub out6 {
+    eval q{eval 'self->{n}'};
+}
+
+sub out7 {
+    eval q{eval {self->{n}}};
+}
+
+
+my $depth = 20;
+sub out8 {
+    if ($depth == 0) {
+        return eval {
+            self->{n};
+        }
+    }
+    $depth--;
+    return eval {
+        self->out8;
+    }
+}
+
 1;

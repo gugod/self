@@ -1,6 +1,7 @@
 use lib 't/lib';
 use EvalTest;
-use Test::More tests => 3;
+use Test::More tests => 8;
+
 
 {
     my $o = EvalTest->new;
@@ -8,14 +9,9 @@ use Test::More tests => 3;
     is($o->out, 1);
 }
 
-{
+for (2..8) {
     my $o = EvalTest->new;
-    $o->in(1);
-    is($o->out2, 1);
-}
-
-{
-    my $o = EvalTest->new;
-    $o->in(1);
-    is($o->out3, 1);
+    my $m = "out$_";
+    $o->in($_);
+    is($o->$m, $_);
 }
