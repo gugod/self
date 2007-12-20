@@ -4,8 +4,7 @@ use warnings;
 package self;
 use 5.006;
 
-our $VERSION = '0.14';
-
+our $VERSION = '0.15';
 
 use Sub::Exporter -setup => {
     exports => [qw(self args)],
@@ -47,7 +46,7 @@ self - Provides "self" and "args" keywords in your OO program.
 
 =head1 VERSION
 
-This document describes self version 0.0.1
+This document describes self version 0.15
 
 =head1 SYNOPSIS
 
@@ -82,6 +81,9 @@ Basically, C<self> is just eqaul to C<$_[0]>, and C<args> is just C<$_[1..$#_]>.
 
 Noted that they are not scalar variables, but barewords.
 
+The "examples" directory in the distribution file contains a simple
+Counter object example written with "self".
+
 =head1 INTERFACE
 
 =over
@@ -102,7 +104,7 @@ self.pm requires no configuration files or environment variables.
 
 =head1 DEPENDENCIES
 
-C<Exporter::Lite>
+C<Sub::Exporter>
 
 =head1 INCOMPATIBILITIES
 
