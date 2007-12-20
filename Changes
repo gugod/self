@@ -1,7 +1,11 @@
 Revision history for self
 
+0.15
+- More tests to proof.
+- Documentation correction.
+
 0.14
-- Emergency fix  for wrong depency. :(
+- Emergency fix for wrong depency. :(
 
 0.13
 - Make it work inside 'eval'.

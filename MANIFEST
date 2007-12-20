@@ -1,4 +1,7 @@
+.shipit
 Changes
+examples/Counter.pm
+examples/play_counter.pl
 inc/Module/Install.pm
 inc/Module/Install/Base.pm
 inc/Module/Install/Can.pm
@@ -15,9 +18,11 @@ META.yml			# Will be created by "make dist"
 README
 t/00.load.t
 t/02.eval.t
+t/03.interpolation.t
 t/0simple.t
 t/lib/Counter.pm
 t/lib/EvalTest.pm
+t/lib/InterpolationTest.pm
 t/perlcritic.t
 t/pod-coverage.t
 t/pod.t
