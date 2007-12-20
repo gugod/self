@@ -13,7 +13,6 @@ use Sub::Exporter -setup => {
     }
 };
 
-use YAML;
 sub _args {
     my $level = 2;
     my @c = ();
