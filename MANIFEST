@@ -19,7 +19,9 @@ README
 t/00.load.t
 t/02.eval.t
 t/03.interpolation.t
+t/04.autoload.t
 t/0simple.t
+t/lib/AutoloadTest.pm
 t/lib/Counter.pm
 t/lib/EvalTest.pm
 t/lib/InterpolationTest.pm
