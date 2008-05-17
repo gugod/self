@@ -17,9 +17,8 @@ sub _args {
     my $level = 2;
     my @c = ();
     package DB;
-    while ( !defined($c[3]) || $c[3] eq '(eval)' ) {
-        @c = caller($level++);
-    }
+    @c = caller($level++)
+        while !defined($c[3]) || $c[3] eq '(eval)';
     return @DB::args;
 }
 
