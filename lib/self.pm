@@ -16,13 +16,9 @@ use Sub::Exporter -setup => {
 sub _args {
     my $level = 2;
     my @c = ();
-    while ( !defined($c[3]) || $c[3] eq '(eval)') {
-        @c = do {
-            package DB;
-            @DB::args = ();
-            caller($level);
-        };
-        $level++;
+    package DB;
+    while ( !defined($c[3]) || $c[3] eq '(eval)' ) {
+        @c = caller($level++);
     }
     return @DB::args;
 }
