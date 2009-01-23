@@ -67,12 +67,12 @@ This document describes self version 0.15
 
 =head1 DESCRIPTION
 
-This moudles adds C<self> and C<args> keywords in your Perl OO module. It's really just
+This module adds C<self> and C<args> keywords in your package. It's really just
 handy helpers to get rid of:
 
     my $self = shift;
 
-Basically, C<self> is just eqaul to C<$_[0]>, and C<args> is just C<$_[1..$#_]>.
+Basically, C<self> is just equal to C<$_[0]>, and C<args> is just C<$_[1..$#_]>.
 
 Noted that they are not scalar variables, but barewords.
 
