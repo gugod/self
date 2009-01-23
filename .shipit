@@ -1,6 +1,6 @@
 steps = FindVersion, ChangeVersion, CheckChangeLog, DistTest, Commit, Tag, MakeDist, UploadCPAN
 
-svk.tagpattern = //mirror/handlino-pub/perl5/tags/self-%v
+git.tagpattern = release-%v
 
 CheckChangeLog.files = Changes
 
