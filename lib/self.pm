@@ -4,7 +4,7 @@ use warnings;
 package self;
 use 5.006;
 
-our $VERSION = '0.15';
+our $VERSION = '0.30';
 use Sub::Exporter;
 
 use B::Hooks::Parser;

@@ -1,5 +1,8 @@
 Revision history for self
 
+0.30
+- Here comes the B:: -based implementation that gives you $self and @args
+
 0.15
 - More tests to proof.
 - Documentation correction.
