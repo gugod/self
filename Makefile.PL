@@ -4,7 +4,11 @@ use inc::Module::Install;
 
 all_from 'lib/self.pm';
 
-requires        'Sub::Exporter'     => '0';
+requires
+    'B::OPCheck' => '0.27',
+    'B::Hooks::Parser' => '0.08',
+    'Sub::Exporter'     => '0';
+
 build_requires  'Test::More'        => '0.42';
 
 tests 't/*.t';
