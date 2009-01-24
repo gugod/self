@@ -5,13 +5,32 @@ package self;
 use 5.006;
 
 our $VERSION = '0.15';
+use Sub::Exporter;
 
-use Sub::Exporter -setup => {
-    exports => [qw(self args)],
-    groups  => {
-        default =>  [ -all ],
+use B::Hooks::Parser;
+
+sub import {
+    my ($class) = @_;
+
+    B::Hooks::Parser::inject('use B::OPCheck const => check => \&self::_check;');
+
+    my $exporter = Sub::Exporter::build_exporter({
+        into_level => 1,
+        exports => [qw(self args)],
+        groups  => { default =>  [ -all ] }
+    });
+    $exporter->(@_);
+}
+
+sub _check {
+    my $linestr = B::Hooks::Parser::get_linestr;
+    if ($linestr =~ m/^ sub \s+ \w+ \s+ { /x ) {
+        if (index($linestr, '{my($self,@args)=@_;') < 0) {
+            $linestr =~ s/{/{my(\$self,\@args)=\@_;/;
+            B::Hooks::Parser::set_linestr($linestr);
+        }
     }
-};
+}
 
 sub _args {
     my $level = 2;

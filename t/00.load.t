@@ -1,7 +1,10 @@
 use Test::More tests => 1;
 
-BEGIN {
-use_ok( 'self' );
+use self;
+
+sub p {
+    is $self, "ok";
 }
 
+p("ok");
 diag( "Testing self $self::VERSION" );
