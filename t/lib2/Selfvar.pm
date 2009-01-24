@@ -13,5 +13,8 @@ sub pet {
     return $self->{pet};
 }
 
+   sub echo {
+       return $self;
+   }
 
 1;

@@ -24,10 +24,15 @@ sub import {
 
 sub _check {
     my $linestr = B::Hooks::Parser::get_linestr;
-    if ($linestr =~ m/^ sub \s+ \w+ \s+ { /x ) {
-        if (index($linestr, '{my($self,@args)=@_;') < 0) {
-            $linestr =~ s/{/{my(\$self,\@args)=\@_;/;
-            B::Hooks::Parser::set_linestr($linestr);
+    my $offset  = B::Hooks::Parser::get_linestr_offset;
+
+    if (substr($linestr, $offset, 3) eq 'sub') {
+        my $line = substr($linestr, $offset);
+         if ($line =~ m/^sub\s.*{ /x ) {
+            if (index($line, '{my($self,@args)=@_;') < 0) {
+                substr($line, index($line, '{') + 1, 0)  = 'my($self,@args)=@_;';
+                B::Hooks::Parser::inject($line);
+            }
         }
     }
 }
