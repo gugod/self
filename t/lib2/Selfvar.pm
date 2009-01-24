@@ -13,6 +13,9 @@ sub pet {
     return $self->{pet};
 }
 
+sub echo0{$self}
+sub echo1{$self} sub echo2{$self}
+
    sub echo {
        return $self;
    }
