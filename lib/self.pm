@@ -61,11 +61,11 @@ __END__
 
 =head1 NAME
 
-self - Provides "self" and "args" keywords in your OO program.
+self - provides '$self' in OO code.
 
 =head1 VERSION
 
-This document describes self version 0.15
+This document describes self version 0.30.
 
 =head1 SYNOPSIS
 
@@ -77,41 +77,63 @@ This document describes self version 0.15
         return bless({}, shift);
     }
 
-    # 'self' is special now.
+    # '$self' is special now.
     sub foo {
-        self->{foo}
+        $self->{foo}
     }
 
-    # 'args' too
+    # '@args' too
     sub set {
-        my ($foo, $bar) = args;
-        self->{foo} = $foo;
-        self->{bar} = $bar;
+        my ($foo, $bar) = @args;
+        $self->{foo} = $foo;
+        $self->{bar} = $bar;
     }
 
 =head1 DESCRIPTION
 
-This module adds C<self> and C<args> keywords in your package. It's really just
-handy helpers to get rid of:
+This module adds C<$self> and C<@args> variables in your code. So you
+don't need to say:
 
     my $self = shift;
 
-Basically, C<self> is just equal to C<$_[0]>, and C<args> is just C<$_[1..$#_]>.
+The provided C<$self> and C<@args> are lexicals in your sub, and it's
+always the same as saying:
 
-Noted that they are not scalar variables, but barewords.
+    my ($self, @args) = @_;
 
-The "examples" directory in the distribution file contains a simple
-Counter object example written with "self".
+... in the first line of sub.
+
+However it is not source filtering, but compile-time code
+injection. For more info about code injection, see L<B::Hooks::Parser>
+or L<Devel::Declare>.
+
+It also exports a C<self> and a C<args> functions. Basically C<self> is just
+equal to C<$_[0]>, and C<args> is just C<$_[1..$#_]>.
+
+For convienence (and for backward compatibility), these two functions
+are exported by default. If you don't want them to be exported, you
+need to say:
+
+    use self ();
+
+It is recommended to use variables instead, because it's much much
+faster. There's a benchmark program under "example" directory compare
+them: Here's one example run:
+
+    > perl -Ilib examples/benchmark.pl
+              Rate  self $self
+    self   46598/s    --  -92%
+    $self 568182/s 1119%    --
 
 =head1 INTERFACE
 
 =over
 
-=item self
+=item $self, or self
 
 Return the current object.
 
-=item args
+=item @args, or args
 
 Return the argument list.
 
@@ -123,7 +145,7 @@ self.pm requires no configuration files or environment variables.
 
 =head1 DEPENDENCIES
 
-C<Sub::Exporter>
+C<B::OPCheck>, C<B::Hooks::Parser>, C<Sub::Exporter>
 
 =head1 INCOMPATIBILITIES
 
@@ -144,7 +166,7 @@ Kang-min Liu  C<< <gugod@gugod.org> >>
 
 =head1 LICENCE AND COPYRIGHT
 
-Copyright (c) 2007, Kang-min Liu C<< <gugod@gugod.org> >>.
+Copyright (c) 2007, 2008, 2009, Kang-min Liu C<< <gugod@gugod.org> >>.
 
 This module is free software; you can redistribute it and/or
 modify it under the same terms as Perl itself. See L<perlartistic>.

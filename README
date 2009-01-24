@@ -1,11 +1,9 @@
-self.pm version 0.0.1
-
-self.pm provides 'self' and 'args' methods for your Perl OO modules, so you don't need to
+self.pm provides $self and @args for your Perl OO modules, so you don't need to
 say:
 
     my $self = shift;
 
-This is no source filter.
+And this is no source filter.
 
 INSTALLATION
 
