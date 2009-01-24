@@ -153,11 +153,30 @@ None reported.
 
 =head1 BUGS AND LIMITATIONS
 
-No bugs have been reported.
+However, in some cases, C<$self> and C<@args> may failed to be
+injected. At this point, please ensure that your sub declaration has
+its '{' at the same line like this:
 
-Please report any bugs or feature requests to
-C<bug-self@rt.cpan.org>, or through the web interface at
-L<http://rt.cpan.org>.
+    sub foo {
+    }
+
+It's ok to have the entire sub in one line:
+
+    sub foo { }
+
+But this doesn't work yet:
+
+   sub foo
+   {
+       foo;
+   }
+
+Neither does it work on methods generated in runtime. Remember, it's a
+compile-time code injection. For those cases, use C<self> function
+instead.
+
+Please report any bugs or feature requests to C<bug-self@rt.cpan.org>,
+or through the web interface at L<http://rt.cpan.org>.
 
 =head1 AUTHOR
 
