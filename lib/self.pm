@@ -49,6 +49,8 @@ sub _check {
     # ...
     # }
     elsif (index($linestr, 'sub') >= 0) {
+        $offset += Devel::Declare::toke_skipspace($offset);
+
         if ($linestr =~ /(sub.*?\n\s*{)/) {
             my $pos = index($linestr, $1);
             if ($pos + length($1) - 1 == $offset) {
