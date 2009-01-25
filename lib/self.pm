@@ -135,11 +135,18 @@ or L<Devel::Declare>.
 It also exports a C<self> and a C<args> functions. Basically C<self> is just
 equal to C<$_[0]>, and C<args> is just C<$_[1..$#_]>.
 
-For convienence (and for backward compatibility), these two functions
+For convienence (and backward compatibility), these two functions
 are exported by default. If you don't want them to be exported, you
 need to say:
 
     use self ();
+
+Since self.pm uses L<Sub::Exporter>, the exported <self> funciton
+can be renamed:
+
+    use self self => { -as => 'this' };
+
+For more information, see L<Sub::Exporter>.
 
 It is recommended to use variables instead, because it's much much
 faster. There's a benchmark program under "example" directory compare
