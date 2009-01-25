@@ -7,12 +7,15 @@ use 5.006;
 our $VERSION = '0.30';
 use Sub::Exporter;
 
-use B::Hooks::Parser;
+use Devel::Declare;
 
 sub import {
     my ($class) = @_;
 
-    B::Hooks::Parser::inject('use B::OPCheck const => check => \&self::_check;');
+    my $linestr = Devel::Declare::get_linestr;
+    my $offset  = Devel::Declare::get_linestr_offset;
+    substr($linestr, $offset, 0) = 'use B::OPCheck const => check => \&self::_check;';
+    Devel::Declare::set_linestr($linestr);
 
     my $exporter = Sub::Exporter::build_exporter({
         into_level => 1,
@@ -23,15 +26,18 @@ sub import {
 }
 
 sub _check {
-    my $linestr = B::Hooks::Parser::get_linestr;
-    my $offset  = B::Hooks::Parser::get_linestr_offset;
+    my $op = shift;
+    return unless ref($op->gv) eq 'B::PV';
+
+    my $linestr = Devel::Declare::get_linestr;
+    my $offset  = Devel::Declare::get_linestr_offset;
 
     if (substr($linestr, $offset, 3) eq 'sub') {
         my $line = substr($linestr, $offset);
          if ($line =~ m/^sub\s.*{ /x ) {
             if (index($line, '{my($self,@args)=@_;') < 0) {
-                substr($line, index($line, '{') + 1, 0)  = 'my($self,@args)=@_;';
-                B::Hooks::Parser::inject($line);
+                substr($linestr, $offset + index($line, '{') + 1, 0) = 'my($self,@args)=@_;';
+                Devel::Declare::set_linestr($linestr);
             }
         }
     }
@@ -145,7 +151,7 @@ self.pm requires no configuration files or environment variables.
 
 =head1 DEPENDENCIES
 
-C<B::OPCheck>, C<B::Hooks::Parser>, C<Sub::Exporter>
+C<B::OPCheck>, C<Devel::Declare>, C<Sub::Exporter>
 
 =head1 INCOMPATIBILITIES
 
