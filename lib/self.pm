@@ -185,25 +185,30 @@ None reported.
 
 =head1 BUGS AND LIMITATIONS
 
-However, in some cases, C<$self> and C<@args> may failed to be
-injected. At this point, please ensure that your sub declaration has
-its '{' at the same line like this:
+In some cases, C<$self> and C<@args> may failed to be injected.
+
+If you're using 0.30, please ensure that your sub declaration has its
+'{' at the same line like this:
 
     sub foo {
     }
 
-It's ok to have the entire sub in one line:
+Also it's ok to have the entire sub in one line:
 
     sub foo { }
 
-But this doesn't work yet:
+Please upgrade to 0.31 if you prefer this style of code:
 
    sub foo
    {
-       foo;
+       $self;
    }
 
-Neither does it work on methods generated in runtime. Remember, it's a
+Extra spaces around sub declarations are handled as much as possible,
+if you found any cases that it failed to work, please send me bug
+reports with your test cases.
+
+It does it work on methods generated in runtime. Remember, it's a
 compile-time code injection. For those cases, use C<self> function
 instead.
 
