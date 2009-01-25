@@ -7,7 +7,7 @@ use 5.006;
 our $VERSION = '0.30';
 use Sub::Exporter;
 
-use Devel::Declare;
+use Devel::Declare ();
 
 sub import {
     my ($class) = @_;
