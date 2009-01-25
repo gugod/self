@@ -37,11 +37,27 @@ sub _check {
         my $line = substr($linestr, $offset);
          if ($line =~ m/^sub\s.*{ /x ) {
             if (index($line, "{$code") < 0) {
-                substr($linestr, $offset + index($line, '{') + 1, 0) = $code; 
+                substr($linestr, $offset + index($line, '{') + 1, 0) = $code;
                 Devel::Declare::set_linestr($linestr);
             }
         }
     }
+
+    # This elsif block handles:
+    # sub foo
+    # {
+    # ...
+    # }
+    elsif (index($linestr, 'sub') >= 0) {
+        if ($linestr =~ /(sub.*?\n\s*{)/) {
+            my $pos = index($linestr, $1);
+            if ($pos + length($1) - 1 == $offset) {
+                substr($linestr, $offset + 1, 0) = $code;
+                Devel::Declare::set_linestr($linestr);
+            }
+        }
+    }
+
 }
 
 sub _args {
