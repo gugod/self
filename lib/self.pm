@@ -32,11 +32,12 @@ sub _check {
     my $linestr = Devel::Declare::get_linestr;
     my $offset  = Devel::Declare::get_linestr_offset;
 
+    my $code = 'my($self,@args)=@_;';
     if (substr($linestr, $offset, 3) eq 'sub') {
         my $line = substr($linestr, $offset);
          if ($line =~ m/^sub\s.*{ /x ) {
-            if (index($line, '{my($self,@args)=@_;') < 0) {
-                substr($linestr, $offset + index($line, '{') + 1, 0) = 'my($self,@args)=@_;';
+            if (index($line, "{$code") < 0) {
+                substr($linestr, $offset + index($line, '{') + 1, 0) = $code; 
                 Devel::Declare::set_linestr($linestr);
             }
         }
