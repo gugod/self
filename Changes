@@ -1,5 +1,8 @@
 Revision history for self
 
+0.32
+- fix deps
+
 0.31
 - Make it parses sub declaration when '{' is not in the same line as 'sub'
 
