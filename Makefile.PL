@@ -5,7 +5,7 @@ use inc::Module::Install;
 all_from 'lib/self.pm';
 
 requires
-    'Devel::Declare' => '003004',
+    'Devel::Declare' => '0.003004',
     'B::OPCheck' => '0.27',
     'B::Hooks::Parser' => '0.08',
     'Sub::Exporter'     => '0';
