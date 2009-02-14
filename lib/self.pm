@@ -10,11 +10,16 @@ use Sub::Exporter;
 use Devel::Declare ();
 use B::Hooks::Parser;
 
+my $NO_SELF;
+    
 sub import {
     my ($class) = @_;
+    my $caller = caller;
 
-    my $linestr = B::Hooks::Parser::get_linestr;
-    my $offset  = B::Hooks::Parser::get_linestr_offset;
+    B::Hooks::Parser::setup();
+
+    my $linestr = B::Hooks::Parser::get_linestr();
+    my $offset  = B::Hooks::Parser::get_linestr_offset();
     substr($linestr, $offset, 0) = 'use B::OPCheck const => check => \&self::_check;';
     B::Hooks::Parser::set_linestr($linestr);
 
@@ -26,8 +31,16 @@ sub import {
     $exporter->(@_);
 }
 
+sub unimport {
+    my ($class) = @_;
+    my $caller = caller;
+    $NO_SELF = 1;
+}
+
 sub _check {
     my $op = shift;
+    my $caller = caller;
+    return if $NO_SELF;
     return unless ref($op->gv) eq 'B::PV';
 
     my $linestr = B::Hooks::Parser::get_linestr;
