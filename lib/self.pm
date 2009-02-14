@@ -8,14 +8,15 @@ our $VERSION = '0.32';
 use Sub::Exporter;
 
 use Devel::Declare ();
+use B::Hooks::Parser;
 
 sub import {
     my ($class) = @_;
 
-    my $linestr = Devel::Declare::get_linestr;
-    my $offset  = Devel::Declare::get_linestr_offset;
+    my $linestr = B::Hooks::Parser::get_linestr;
+    my $offset  = B::Hooks::Parser::get_linestr_offset;
     substr($linestr, $offset, 0) = 'use B::OPCheck const => check => \&self::_check;';
-    Devel::Declare::set_linestr($linestr);
+    B::Hooks::Parser::set_linestr($linestr);
 
     my $exporter = Sub::Exporter::build_exporter({
         into_level => 1,
@@ -29,8 +30,8 @@ sub _check {
     my $op = shift;
     return unless ref($op->gv) eq 'B::PV';
 
-    my $linestr = Devel::Declare::get_linestr;
-    my $offset  = Devel::Declare::get_linestr_offset;
+    my $linestr = B::Hooks::Parser::get_linestr;
+    my $offset  = B::Hooks::Parser::get_linestr_offset;
 
     my $code = 'my($self,@args)=@_;';
     if (substr($linestr, $offset, 3) eq 'sub') {
@@ -38,7 +39,7 @@ sub _check {
          if ($line =~ m/^sub\s.*{ /x ) {
             if (index($line, "{$code") < 0) {
                 substr($linestr, $offset + index($line, '{') + 1, 0) = $code;
-                Devel::Declare::set_linestr($linestr);
+                B::Hooks::Parser::set_linestr($linestr);
             }
         }
     }
@@ -50,12 +51,11 @@ sub _check {
     # }
     elsif (index($linestr, 'sub') >= 0) {
         $offset += Devel::Declare::toke_skipspace($offset);
-
         if ($linestr =~ /(sub.*?\n\s*{)/) {
             my $pos = index($linestr, $1);
             if ($pos + length($1) - 1 == $offset) {
                 substr($linestr, $offset + 1, 0) = $code;
-                Devel::Declare::set_linestr($linestr);
+                B::Hooks::Parser::set_linestr($linestr);
             }
         }
     }
