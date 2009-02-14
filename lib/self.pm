@@ -237,9 +237,9 @@ Kang-min Liu  C<< <gugod@gugod.org> >>
 
 Copyright (c) 2007, 2008, 2009, Kang-min Liu C<< <gugod@gugod.org> >>.
 
-This module is free software; you can redistribute it and/or
-modify it under the same terms as Perl itself. See L<perlartistic>.
+This is free software, licensed under:
 
+    The MIT (X11) License
 
 =head1 DISCLAIMER OF WARRANTY
 

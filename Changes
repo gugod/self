@@ -1,5 +1,9 @@
 Revision history for self
 
+0.33
+- license changed to MIT.
+- support 'no self'
+
 0.32
 - fix deps
 
