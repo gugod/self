@@ -24,7 +24,7 @@ sub add {
 }
 
 package main;
-use Test::More tests => o3;
+use Test::More tests => 3;
 
 my $x = Joey->new(10);
 
