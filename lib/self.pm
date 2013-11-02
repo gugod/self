@@ -11,7 +11,7 @@ use Devel::Declare ();
 use B::Hooks::Parser;
 
 my $NO_SELF;
-    
+
 sub import {
     my ($class) = @_;
     my $caller = caller;
