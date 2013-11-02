@@ -10,6 +10,7 @@ perl:
 
 before_install:
    - '(echo yes; echo o conf prerequisites_policy follow;echo o conf commit) | cpan'
+   - cpanm --verbose --installdeps .
 
 notifications:
    irc:
