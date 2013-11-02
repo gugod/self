@@ -5,14 +5,13 @@ perl:
    - 5.16
    - 5.14
    - 5.12
-   - 5.10
+   - "5.10"
    - 5.8
 
 before_install:
    - '(echo yes; echo o conf prerequisites_policy follow;echo o conf commit) | cpan'
    - cpanm --notest --quiet Module::Install::CPANfile
    - cpanm --notest --quiet Module::Install::AuthorTests
-   - cpanm --verbose --installdeps .
 
 notifications:
    irc:
