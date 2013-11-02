@@ -5,6 +5,7 @@ use inc::Module::Install;
 all_from 'lib/self.pm';
 
 requires
+    'PadWalker' => '1.93',
     'Devel::Declare' => '0.003004',
     'B::OPCheck' => '0.27',
     'B::Hooks::Parser' => '0.08',
