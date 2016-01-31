@@ -1,6 +1,7 @@
 Revision history for self
 
 0.34
+- remove self::implicit -- "self" already has the functionality.
 - Fix code injection under perl 5.18, 5.20, and 5.22.
 
 0.33
