@@ -45,11 +45,23 @@ sub _check {
 
     my $linestr = B::Hooks::Parser::get_linestr;
     my $offset  = B::Hooks::Parser::get_linestr_offset;
+    my $line = substr($linestr, $offset);
 
     my $code = 'my($self,@args)=@_;';
-    if (substr($linestr, $offset, 3) eq 'sub') {
-        my $line = substr($linestr, $offset);
-         if ($line =~ m/^sub\s.*{ /x ) {
+
+    # This cover cases like:
+    #     sub foo { ... }
+    # Offset is at the first '{' because subroutine name is also a "const"
+    if (substr($linestr, $offset, 1) eq '{') {
+        if (substr($linestr, 0, $offset) =~ m/sub\s\S+\s*\z/x ) {
+            if (index($line, "{$code") < 0) {
+                substr($linestr, $offset + 1, 0) = $code;
+                B::Hooks::Parser::set_linestr($linestr);
+            }
+        }
+    }
+    elsif (substr($linestr, $offset, 3) eq 'sub') {
+        if ($line =~ m/^sub\s.*{ /x ) {
             if (index($line, "{$code") < 0) {
                 substr($linestr, $offset + index($line, '{') + 1, 0) = $code;
                 B::Hooks::Parser::set_linestr($linestr);
@@ -72,7 +84,6 @@ sub _check {
             }
         }
     }
-
 }
 
 sub _args {
