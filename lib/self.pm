@@ -4,7 +4,7 @@ use warnings;
 package self;
 use 5.006;
 
-our $VERSION = '0.34';
+our $VERSION = '0.35';
 use Sub::Exporter;
 
 use Devel::Declare ();
