@@ -232,7 +232,7 @@ Extra spaces around sub declarations are handled as much as possible,
 if you found any cases that it failed to work, please send me bug
 reports with your test cases.
 
-It does it work on methods generated in runtime. Remember, it's a
+It does not work on methods generated in runtime. Remember, it's a
 compile-time code injection. For those cases, use C<self> function
 instead.
 

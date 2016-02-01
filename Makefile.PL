@@ -4,6 +4,8 @@ use inc::Module::Install;
 
 all_from 'lib/self.pm';
 
+repository 'git://github.com/gugod/self.git';
+
 requires
     'PadWalker' => '1.93',
     'Devel::Declare' => '0.003004',
