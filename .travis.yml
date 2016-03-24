@@ -1,3 +1,5 @@
+sudo: false
+
 language: perl
 perl:
    - "5.22"
@@ -12,10 +14,8 @@ perl:
    - 5.8
 
 before_install:
-   - perl -e 'print "no\n"' | perl -MCPAN::FirstTime -e CPAN::FirstTime::init
-   - '(echo yes; echo o conf prerequisites_policy follow;echo o conf commit) | cpan'
-   - cpanm --notest --quiet Module::Install::CPANfile
-   - cpanm --notest --quiet Module::Install::AuthorTests
+   - eval $(curl https://travis-perl.github.io/init) --auto
+   - cpanm --notest --quiet Module::Install::CPANfile Module::Install::AuthorTests
 
 notifications:
    irc:
