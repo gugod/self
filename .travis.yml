@@ -12,7 +12,7 @@ perl:
    - 5.8
 
 before_install:
-   - perl -e 'print "no\n" | perl -MCPAN::FirstTime -e CPAN::FirstTime::init
+   - perl -e 'print "no\n"' | perl -MCPAN::FirstTime -e CPAN::FirstTime::init
    - '(echo yes; echo o conf prerequisites_policy follow;echo o conf commit) | cpan'
    - cpanm --notest --quiet Module::Install::CPANfile
    - cpanm --notest --quiet Module::Install::AuthorTests
