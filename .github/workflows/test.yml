@@ -15,8 +15,8 @@ jobs:
       - name: Setup Perl environment
         uses: shogo82148/actions-setup-perl@v1
       - name: Install Dependencies
-        run:
-        - cpanm --notest --quiet Module::Install::CPANfile Module::Install::AuthorTests
-        - cpanm -q -n --no-man-pages --installdeps .
+        run: |-
+          cpanm --notest --quiet Module::Install::CPANfile Module::Install::AuthorTests
+          cpanm -q -n --no-man-pages --installdeps .
       - name: prove
         run: prove -lvr t/
