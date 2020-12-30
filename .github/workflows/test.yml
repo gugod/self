@@ -1,0 +1,22 @@
+name: test
+
+on: [ push ]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: ['ubuntu-latest', 'macos-latest', 'windows-latest']
+        perl: [ '5.32', '5.30', '5.28' ]
+    name: Perl ${{ matrix.perl }} on ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Perl environment
+        uses: shogo82148/actions-setup-perl@v1
+      - name: Install Dependencies
+        run:
+        - cpanm --notest --quiet Module::Install::CPANfile Module::Install::AuthorTests
+        - cpanm -q -n --no-man-pages --installdeps .
+      - name: prove
+        run: prove -lvr t/
