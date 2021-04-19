@@ -23,3 +23,4 @@
 ^\.DS_Store
 ^.travis.yml$
 ^MYMETA\.
+^.github/
