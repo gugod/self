@@ -16,7 +16,7 @@ WriteMakefile(
         'Sub::Exporter'    => '0',
     },
     BUILD_REQUIRES => {
-        'Test::More' => '0.42',
+        'Test2::V0'  => '0.000139',
     },
     META_MERGE => {
         'meta-spec' => { version => 2 },

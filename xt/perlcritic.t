@@ -1,6 +1,6 @@
 #!perl
 
-use Test::More;
+use Test2::V0;
 
 unless ($ENV{TEST_PERL_CRITIC}) {
     plan skip_all => "set TEST_PERL_CRITIC to enable this test";
