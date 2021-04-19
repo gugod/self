@@ -10,9 +10,8 @@ WriteMakefile(
     AUTHOR => 'Kang-min Liu <gugod@gugod.org>',
     PREREQ_PM => {
         'PadWalker'        => '1.93',
-        'Devel::Declare'   => '0.003004',
         'B::OPCheck'       => '0.27',
-        'B::Hooks::Parser' => '0.08',
+        'B::Hooks::Parser' => '0.21',
         'Sub::Exporter'    => '0',
     },
     BUILD_REQUIRES => {
