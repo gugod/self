@@ -1,5 +1,6 @@
 Revision history for self
 
+0.36 2021-04-19T22:19:41+0900
 - No longer depends on Devel::Declare
 - Migrate test code to Test::V2
 
